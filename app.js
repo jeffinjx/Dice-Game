@@ -5,12 +5,13 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-app.set("view engine", "ejs");
-
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
 
-mongoose.connect("mongodb+srv://admin-jeff:test123@cluster0.f0p74mp.mongodb.net/diceDB", {useNewUrlParser:true});
+mongoose.connect("mongodb://0.0.0.0:27017/userDB", {
+  useNewUrlParser: true
+});
 
 const diceSchema = new mongoose.Schema ({
   title: String,
