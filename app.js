@@ -1,25 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const jquery = require("jquery");
-const mongoose = require("mongoose");
 
 const app = express();
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true}));
-
-mongoose.connect("mongodb://0.0.0.0:27017/userDB", {
-  useNewUrlParser: true
-});
-
-const diceSchema = new mongoose.Schema ({
-  title: String,
-  roll1: Number,
-  roll2: Number
-});
-
-const Dice = mongoose.model("Dice", diceSchema);
 
 app.get("/", function(req, res) {
 
@@ -36,7 +22,7 @@ app.get("/", function(req, res) {
     outcomeTitle = "Tis A Draw!"
   };
 
-  const changedDice = new Dice({
+  const changedDice = ({
     title: outcomeTitle,
     roll1: random1,
     roll2: random2
